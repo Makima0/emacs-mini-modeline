@@ -46,12 +46,12 @@
 ;; Forward declaration for evil-mode-line-tag
 (defvar evil-mode-line-tag)
 
-(defcustom mini-modeline-l-format nil
+(defcustom mini-modeline-r-format nil
   "Left part of mini-modeline, same format with `mode-line-format'."
   :type `(repeat symbol)
   :group 'mini-modeline)
 
-(defcustom mini-modeline-r-format '("%e" mode-line-front-space
+(defcustom mini-modeline-l-format '("%e" mode-line-front-space
                                     mode-line-mule-info
                                     mode-line-client
                                     mode-line-modified
@@ -76,24 +76,24 @@
   :type 'boolean
   :group 'mini-modeline)
 
-(defcustom mini-modeline-enhance-visual t
+(defcustom mini-modeline-enhance-visual nil
   "Enhance minibuffer and window's visibility."
   :type 'boolean
   :group 'mini-modeline)
 
 (defface mini-modeline-mode-line
   '((((background light))
-     :background "#55ced1" :height 0.14 :box nil)
+     :background "#ff5555" :height 0.14 :box nil)
     (t
-     :background "#008b8b" :height 0.14 :box nil))
+     :background "#bd93f9" :height 0.14 :box nil))
   "Modeline face for active window."
   :group 'mini-modeline)
 
 (defface mini-modeline-mode-line-inactive
   '((((background light))
-     :background "#dddddd" :height 0.1 :box nil)
+     :background "#bd93f9" :height 0.1 :box nil)
     (t
-     :background "#333333" :height 0.1 :box nil))
+     :background "#ff5555" :height 0.1 :box nil))
   "Modeline face for inactive window."
   :group 'mini-modeline)
 
@@ -440,6 +440,10 @@ BODY will be supplied with orig-func and args."
   (advice-remove #'read-key-sequence 'mini-modeline--read-key-sequence)
   (advice-remove #'read-key-sequence-vector 'mini-modeline--read-key-sequence-vector))
 
+(set-window-scroll-bars
+ (minibuffer-window) 0 nil 0 nil t)
+(set-window-fringes
+ (minibuffer-window) 0 0 nil t)
 
 ;;;###autoload
 (define-minor-mode mini-modeline-mode
